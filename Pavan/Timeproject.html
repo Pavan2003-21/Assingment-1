@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Countdown Timer</title>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+	<h1 id="timer">10:00</h1>
+	<button id="start-button">Start</button>
+	<button id="stop-button">Stop</button>
+
+	<script>
+		let timerElement = document.getElementById('timer');
+		let startButton = document.getElementById('start-button');
+		let stopButton = document.getElementById('stop-button');
+		let seconds = 600; // 10 minutes
+		let interval;
+
+		startButton.addEventListener('click', startTimer);
+		stopButton.addEventListener('click', stopTimer);
+
+		function startTimer() {
+			interval = setInterval(updateTimer, 1000);
+		}
+        function stopTimer() {
+			clearInterval(interval);
+		}
+
+		function updateTimer() {
+			seconds--;
+			let minutes = Math.floor(seconds / 60);
+			let remainingSeconds = seconds % 60;
+			timerElement.textContent = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+			if (seconds === 0) {
+				stopTimer();
+				alert('Time\'s up!');
+			}
+		}
+	</script>
+</body>
+</html>
